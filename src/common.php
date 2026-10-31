@@ -79,3 +79,74 @@ function api_json_input(): array
 
     return $data;
 }
+
+function app_start_session(): void
+{
+    global $config;
+
+    if (session_status() === PHP_SESSION_ACTIVE) {
+        return;
+    }
+
+    $https = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off');
+    $secure = $https || !empty($config['app']['secure_cookies']);
+
+    ini_set('session.use_strict_mode', '1');
+    ini_set('session.use_only_cookies', '1');
+    session_set_cookie_params([
+        'lifetime' => 0,
+        'path' => '/',
+        'secure' => $secure,
+        'httponly' => true,
+        'samesite' => 'Lax',
+    ]);
+    session_start();
+
+    if (isset($_SESSION['user_id'], $_SESSION['last_activity'])
+        && time() - (int) $_SESSION['last_activity'] > 7200) {
+        $_SESSION = [];
+        session_destroy();
+        session_start();
+    }
+
+    if (isset($_SESSION['user_id'])) {
+        $_SESSION['last_activity'] = time();
+    }
+}
+
+function app_logout_session(): void
+{
+    global $config;
+    app_start_session();
+    $_SESSION = [];
+
+    if (ini_get('session.use_cookies')) {
+        $https = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off');
+        $secure = $https || !empty($config['app']['secure_cookies']);
+        setcookie(session_name(), '', [
+            'expires' => time() - 42000,
+            'path' => '/',
+            'secure' => $secure,
+            'httponly' => true,
+            'samesite' => 'Lax',
+        ]);
+    }
+
+    session_destroy();
+}
+
+set_exception_handler(static function (Throwable $exception): void {
+    error_log(sprintf(
+        '%s in %s:%d',
+        $exception->getMessage(),
+        $exception->getFile(),
+        $exception->getLine()
+    ));
+
+    if (!headers_sent()) {
+        api_error(500, 'INTERNAL_ERROR', 'An unexpected error occurred.');
+    }
+});
+
+// Start/check sessions for every API request so idle time is measured consistently.
+app_start_session();
