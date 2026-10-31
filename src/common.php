@@ -135,6 +135,131 @@ function app_logout_session(): void
     session_destroy();
 }
 
+function app_remember_cookie_options(int $expires): array
+{
+    global $config;
+    $https = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off');
+
+    return [
+        'expires' => $expires,
+        'path' => '/',
+        'secure' => $https || !empty($config['app']['secure_cookies']),
+        'httponly' => true,
+        'samesite' => 'Lax',
+    ];
+}
+
+function app_clear_remember_cookie(): void
+{
+    setcookie('remember_me', '', app_remember_cookie_options(time() - 42000));
+    unset($_COOKIE['remember_me']);
+}
+
+function app_delete_remember_cookie_token(): void
+{
+    $cookie = $_COOKIE['remember_me'] ?? '';
+    if (is_string($cookie) && preg_match('/^([a-f0-9]{24})\.[a-f0-9]{64}$/', $cookie, $matches)) {
+        $statement = app_db()->prepare('DELETE FROM remember_tokens WHERE selector = :selector');
+        $statement->execute(['selector' => $matches[1]]);
+    }
+    app_clear_remember_cookie();
+}
+
+function app_issue_remember_token(int $userId): void
+{
+    $database = app_db();
+    $cleanup = $database->prepare(
+        'DELETE FROM remember_tokens WHERE user_id = :user_id AND expires_at <= UTC_TIMESTAMP()'
+    );
+    $cleanup->execute(['user_id' => $userId]);
+
+    $selector = bin2hex(random_bytes(12));
+    $validator = bin2hex(random_bytes(32));
+    $expiresAt = gmdate('Y-m-d H:i:s', time() + (30 * 86400));
+    $insert = $database->prepare(
+        'INSERT INTO remember_tokens (user_id, selector, validator_hash, expires_at)
+         VALUES (:user_id, :selector, :validator_hash, :expires_at)'
+    );
+    $insert->execute([
+        'user_id' => $userId,
+        'selector' => $selector,
+        'validator_hash' => hash('sha256', $validator),
+        'expires_at' => $expiresAt,
+    ]);
+
+    setcookie('remember_me', $selector . '.' . $validator, app_remember_cookie_options(time() + (30 * 86400)));
+}
+
+function app_restore_remembered_user(): bool
+{
+    $cookie = $_COOKIE['remember_me'] ?? '';
+    if (!is_string($cookie) || !preg_match('/^([a-f0-9]{24})\.([a-f0-9]{64})$/', $cookie, $matches)) {
+        if ($cookie !== '') {
+            app_clear_remember_cookie();
+        }
+        return false;
+    }
+
+    $selector = $matches[1];
+    $validator = $matches[2];
+    $statement = app_db()->prepare(
+        'SELECT id, user_id, validator_hash FROM remember_tokens
+         WHERE selector = :selector AND expires_at > UTC_TIMESTAMP() LIMIT 1'
+    );
+    $statement->execute(['selector' => $selector]);
+    $token = $statement->fetch();
+
+    if (!$token) {
+        app_clear_remember_cookie();
+        return false;
+    }
+
+    if (!hash_equals($token['validator_hash'], hash('sha256', $validator))) {
+        $delete = app_db()->prepare('DELETE FROM remember_tokens WHERE user_id = :user_id');
+        $delete->execute(['user_id' => $token['user_id']]);
+        app_clear_remember_cookie();
+        return false;
+    }
+
+    $userId = (int) $token['user_id'];
+    $delete = app_db()->prepare('DELETE FROM remember_tokens WHERE id = :id');
+    $delete->execute(['id' => $token['id']]);
+    session_regenerate_id(true);
+    $_SESSION['user_id'] = $userId;
+    $_SESSION['last_activity'] = time();
+    app_issue_remember_token($userId);
+
+    return true;
+}
+
+function app_require_user(): array
+{
+    app_start_session();
+    $userId = $_SESSION['user_id'] ?? null;
+
+    if (!$userId) {
+        if (!app_restore_remembered_user()) {
+            api_error(401, 'UNAUTHORIZED', 'Please log in to continue.');
+        }
+        $userId = $_SESSION['user_id'];
+    }
+
+    $statement = app_db()->prepare(
+        'SELECT id, username, email, display_name, role, bio, created_at
+         FROM users WHERE id = :id LIMIT 1'
+    );
+    $statement->execute(['id' => $userId]);
+    $user = $statement->fetch();
+
+    if (!$user) {
+        app_logout_session();
+        api_error(401, 'UNAUTHORIZED', 'Please log in to continue.');
+    }
+
+    $user['id'] = (int) $user['id'];
+    return $user;
+}
+
 set_exception_handler(static function (Throwable $exception): void {
     error_log(sprintf(
         '%s in %s:%d',
