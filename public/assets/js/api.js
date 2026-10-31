@@ -46,3 +46,33 @@ function showToast(message, type = 'info') {
     window.setTimeout(() => toast.remove(), 3500);
 }
 
+function showFieldErrors(fields) {
+    for (const [field, message] of Object.entries(fields)) {
+        const input = document.getElementById(field);
+        const error = document.getElementById(`${field}-error`);
+        if (input) input.classList.add('error');
+        if (error) error.textContent = message;
+    }
+}
+
+function clearFieldErrors(fields) {
+    for (const field of fields) {
+        const input = document.getElementById(field);
+        const error = document.getElementById(`${field}-error`);
+        if (input) input.classList.remove('error');
+        if (error) error.textContent = '';
+    }
+}
+
+async function requireGuest() {
+    try {
+        await apiRequest('/api/auth/me');
+        window.location.replace('/');
+        return false;
+    } catch (error) {
+        if (error.status === 401) return true;
+        showToast(error.message, 'error');
+        return false;
+    }
+}
+
