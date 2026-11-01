@@ -1,0 +1,30 @@
+.social-main { width: min(100% - 32px, 760px); margin: 32px auto; }
+.social-panel, .user-card, .tweet-card { border: 1px solid var(--border); border-radius: 14px; padding: 20px; background: var(--background); }
+.social-panel + .social-panel, .tweet-card + .tweet-card, .user-card + .user-card { margin-top: 12px; }
+.social-panel h1, .social-panel h2 { margin-bottom: 12px; }
+.muted, time { color: var(--text-secondary); font-size: 14px; }
+.user-card-name, .tweet-author { color: var(--text); font-weight: 700; }
+.tweet-form textarea { min-height: 100px; resize: vertical; }
+.tweet-form-footer, .tweet-top, .tweet-actions { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.tweet-form-footer, .tweet-actions { margin-top: 12px; }
+.tweet-like-actions { justify-content: flex-start; margin-top: 8px; }
+.tweet-like-button { display: inline-flex; align-items: center; gap: 7px; border: 0; border-radius: 999px; padding: 6px 10px; background: transparent; color: var(--text-secondary); font: inherit; cursor: pointer; }
+.tweet-like-button:hover:not(:disabled), .tweet-like-button[aria-pressed="true"] { color: var(--error); background: #fff1f0; }
+.tweet-like-button:disabled { opacity: .6; cursor: wait; }
+.tweet-heart { font-size: 20px; line-height: 1; }
+.tweet-like-count { min-width: 1ch; }
+.tweet-top { justify-content: flex-start; flex-wrap: wrap; }
+.tweet-content { margin-top: 12px; white-space: pre-wrap; overflow-wrap: anywhere; }
+.edited-label { display: block; margin-top: 8px; }
+.tweet-editor { display: grid; gap: 8px; }
+.tweet-editor textarea { min-height: 90px; }
+.empty-message { padding: 20px; text-align: center; color: var(--text-secondary); }
+@media (max-width: 520px) {
+    .social-panel, .user-card, .tweet-card { padding: 16px; }
+    .social-main { width: min(100% - 20px, 760px); margin: 20px auto; }
+    .nav { padding: 10px; }
+    .nav-actions { gap: 8px; }
+    .nav-user { display: none; }
+    .tweet-top { gap: 6px; }
+    .tweet-author { overflow-wrap: anywhere; }
+}
