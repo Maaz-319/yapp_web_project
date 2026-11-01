@@ -46,6 +46,15 @@ function showToast(message, type = 'info') {
     window.setTimeout(() => toast.remove(), 3500);
 }
 
+function handleProtectedError(error) {
+    if (error.status === 401) {
+        window.location.replace('/login.html');
+        return true;
+    }
+    showToast(error.message || 'The request could not be completed.', 'error');
+    return false;
+}
+
 function showFieldErrors(fields) {
     for (const [field, message] of Object.entries(fields)) {
         const input = document.getElementById(field);
@@ -64,6 +73,20 @@ function clearFieldErrors(fields) {
     }
 }
 
+async function requireUser() {
+    try {
+        const result = await apiRequest('/api/auth/me');
+        return result.user;
+    } catch (error) {
+        if (error.status === 401) {
+            window.location.replace('/login.html');
+            return null;
+        }
+        showToast(error.message, 'error');
+        return null;
+    }
+}
+
 async function requireGuest() {
     try {
         await apiRequest('/api/auth/me');
@@ -76,3 +99,16 @@ async function requireGuest() {
     }
 }
 
+function recheckAuthOnHistoryRestore(requireAdmin = false) {
+    window.addEventListener('pageshow', async (event) => {
+        if (!event.persisted) return;
+        try {
+            const result = await apiRequest('/api/auth/me');
+            if (requireAdmin && result.user.role !== 'admin') {
+                window.location.replace('/');
+            }
+        } catch (error) {
+            if (error.status === 401) window.location.replace('/login.html');
+        }
+    });
+}
