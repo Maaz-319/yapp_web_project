@@ -1,3 +1,45 @@
+function createUserCard(user, currentUserId, onFollowChange) {
+    const card = document.createElement('article');
+    card.className = 'user-card';
+    const details = document.createElement('div');
+    details.className = 'user-card-details';
+    const name = document.createElement('a');
+    name.className = 'user-card-name';
+    name.href = `/profile.html?u=${encodeURIComponent(user.username)}`;
+    name.textContent = user.display_name;
+    const username = document.createElement('div');
+    username.className = 'muted';
+    username.textContent = `@${user.username}`;
+    const bio = document.createElement('p');
+    bio.textContent = user.bio || '';
+    details.append(name, username, bio);
+    card.appendChild(details);
+
+    if (Number(user.id) !== Number(currentUserId)) {
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.className = user.is_following ? 'btn btn-secondary' : 'btn btn-primary';
+        button.textContent = user.is_following ? 'Following' : 'Follow';
+        button.addEventListener('click', async () => {
+            button.disabled = true;
+            try {
+                const method = user.is_following ? 'DELETE' : 'POST';
+                const result = await apiRequest(`/api/users/follow?username=${encodeURIComponent(user.username)}`, { method });
+                user.is_following = result.is_following;
+                button.textContent = user.is_following ? 'Following' : 'Follow';
+                button.className = user.is_following ? 'btn btn-secondary' : 'btn btn-primary';
+                if (onFollowChange) onFollowChange(result, card, user);
+            } catch (error) {
+                handleProtectedError(error);
+            } finally {
+                button.disabled = false;
+            }
+        });
+        card.appendChild(button);
+    }
+    return card;
+}
+
 function formatRelativeTime(value) {
     const date = new Date(`${String(value).replace(' ', 'T')}Z`);
     const seconds = Math.max(0, Math.floor((Date.now() - date.getTime()) / 1000));
