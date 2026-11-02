@@ -10,6 +10,9 @@
 .profile-meta { display: flex; flex-wrap: wrap; gap: 18px; margin-top: 16px; }
 .profile-meta a, .profile-meta span { color: var(--text-secondary); }
 .profile-bio { margin-top: 10px; white-space: pre-wrap; overflow-wrap: anywhere; }
+.search-row { display: flex; gap: 8px; align-items: flex-end; }
+.search-row .form-group { flex: 1; min-width: 0; margin: 0; }
+.search-row input { min-width: 0; }
 .tweet-form textarea { min-height: 100px; resize: vertical; }
 .tweet-form-footer, .tweet-top, .tweet-actions { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
 .tweet-form-footer, .tweet-actions { margin-top: 12px; }
@@ -32,6 +35,8 @@ dialog::backdrop { background: rgba(15, 20, 25, .4); }
     .user-card { align-items: flex-start; }
     .social-panel, .user-card, .tweet-card { padding: 16px; }
     .social-main { width: min(100% - 20px, 760px); margin: 20px auto; }
+    .search-row { align-items: stretch; flex-direction: column; }
+    .search-row .btn { align-self: flex-start; }
     .nav { padding: 10px; }
     .nav-actions { gap: 8px; }
     .nav-user { display: none; }
