@@ -27,6 +27,7 @@
 .edited-label { display: block; margin-top: 8px; }
 .tweet-editor { display: grid; gap: 8px; }
 .tweet-editor textarea { min-height: 90px; }
+.tab-row { display: flex; gap: 12px; margin-bottom: 14px; }
 .empty-message { padding: 20px; text-align: center; color: var(--text-secondary); }
 dialog { width: min(100% - 32px, 480px); margin: auto; border: 1px solid var(--border); border-radius: 14px; padding: 24px; }
 dialog::backdrop { background: rgba(15, 20, 25, .4); }
