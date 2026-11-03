@@ -62,6 +62,28 @@
     text-align: center;
 }
 
+.table-wrap {
+    overflow-x: auto;
+    margin-top: 16px;
+}
+
+.user-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+.user-table th,
+.user-table td {
+    padding: 12px;
+    border-bottom: 1px solid var(--border);
+    overflow-wrap: anywhere;
+}
+
+.user-table th {
+    background: var(--surface);
+}
+
 @media (max-width: 640px) {
     .nav {
         align-items: flex-start;
