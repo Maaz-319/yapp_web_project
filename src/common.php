@@ -260,6 +260,17 @@ function app_require_user(): array
     return $user;
 }
 
+function app_require_admin(): array
+{
+    $user = app_require_user();
+
+    if ($user['role'] !== 'admin') {
+        api_error(403, 'FORBIDDEN', 'You do not have permission to view this page.');
+    }
+
+    return $user;
+}
+
 set_exception_handler(static function (Throwable $exception): void {
     error_log(sprintf(
         '%s in %s:%d',
