@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Manage Users - Yapp</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="stylesheet" href="/assets/css/base.css">
+    <link rel="stylesheet" href="/assets/css/index.css">
+</head>
+<body>
+    <div class="app">
+        <div id="site-nav"></div>
+        <main class="home-main" id="admin-content">
+            <h1>Users</h1>
+            <p id="user-count" class="loading-status" role="status">Loading users…</p>
+            <div class="table-wrap">
+                <table class="user-table">
+                    <thead><tr><th>ID</th><th>Username</th><th>Name</th><th>Email</th><th>Role</th></tr></thead>
+                    <tbody id="user-rows"></tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+    <div id="toast-container" class="toast-container" aria-live="polite" aria-atomic="true"></div>
+    <script src="/assets/js/api.js?v=3"></script>
+    <script src="/assets/js/components.js?v=4"></script>
+    <script src="/assets/js/admin.js?v=3"></script>
+</body>
+</html>
