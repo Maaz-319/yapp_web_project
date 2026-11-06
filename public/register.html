@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,7 @@
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <link rel="stylesheet" href="/assets/css/base.css">
 </head>
+
 <body>
     <div class="auth-page auth-page-branded">
         <section class="auth-visual" aria-label="Yapp">
@@ -22,7 +24,8 @@
             <form id="register-form" class="auth-form" novalidate>
                 <div class="form-group">
                     <label for="display_name">Display name</label>
-                    <input type="text" id="display_name" name="display_name" required maxlength="50" autocomplete="name">
+                    <input type="text" id="display_name" name="display_name" required maxlength="50"
+                        autocomplete="name">
                     <span class="error-message" id="display_name-error"></span>
                 </div>
 
@@ -30,7 +33,8 @@
                     <label for="username">Username</label>
                     <div class="input-with-prefix">
                         <span class="prefix">@</span>
-                        <input type="text" id="username" name="username" required maxlength="20" autocomplete="username" pattern="[a-zA-Z0-9_]{3,20}">
+                        <input type="text" id="username" name="username" required maxlength="20" autocomplete="username"
+                            pattern="[a-zA-Z0-9_]{3,20}">
                     </div>
                     <span class="error-message" id="username-error"></span>
                 </div>
@@ -43,13 +47,15 @@
 
                 <div class="form-group">
                     <label for="password">Password</label>
-                    <input type="password" id="password" name="password" required minlength="8" maxlength="72" autocomplete="new-password">
+                    <input type="password" id="password" name="password" required minlength="8" maxlength="72"
+                        autocomplete="new-password">
                     <span class="error-message" id="password-error"></span>
                 </div>
 
                 <div class="form-group">
                     <label for="confirm_password">Confirm password</label>
-                    <input type="password" id="confirm_password" name="confirm_password" required autocomplete="new-password">
+                    <input type="password" id="confirm_password" name="confirm_password" required
+                        autocomplete="new-password">
                     <span class="error-message" id="confirm_password-error"></span>
                 </div>
 
@@ -67,4 +73,5 @@
     <script src="/assets/js/api.js?v=2"></script>
     <script src="/assets/js/register.js?v=2"></script>
 </body>
+
 </html>

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -9,6 +10,7 @@
     <link rel="stylesheet" href="/assets/css/index.css">
     <link rel="stylesheet" href="/assets/css/social.css">
 </head>
+
 <body>
     <div class="app">
         <div id="site-nav"></div>
@@ -20,14 +22,16 @@
                 <form id="tweet-form" novalidate>
                     <label class="visually-hidden" for="tweet-content">What’s happening?</label>
                     <textarea id="tweet-content" name="content" rows="4" placeholder="What’s happening?"></textarea>
-                    <div class="tweet-form-footer"><span id="tweet-count" class="muted">0/280</span><button class="btn btn-primary" id="tweet-submit" type="submit" disabled>Post</button></div>
+                    <div class="tweet-form-footer"><span id="tweet-count" class="muted">0/280</span><button
+                            class="btn btn-primary" id="tweet-submit" type="submit" disabled>Post</button></div>
                 </form>
             </section>
             <section class="social-panel">
                 <h2 class="visually-hidden">Home feed</h2>
                 <p id="home-feed-status" class="muted loading-status" role="status">Loading your feed…</p>
                 <div id="home-tweets" aria-live="polite"></div>
-                <p class="empty-message" id="home-empty" hidden>No posts in your feed yet. <a href="/search.html">Find people to follow</a>.</p>
+                <p class="empty-message" id="home-empty" hidden>No posts in your feed yet. <a href="/search.html">Find
+                        people to follow</a>.</p>
                 <button class="btn btn-secondary" id="home-more" type="button" hidden>Load more</button>
             </section>
         </main>
@@ -37,4 +41,5 @@
     <script src="/assets/js/components.js?v=4"></script>
     <script src="/assets/js/index.js?v=5"></script>
 </body>
+
 </html>
