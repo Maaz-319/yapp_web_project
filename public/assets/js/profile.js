@@ -11,7 +11,7 @@ async function initProfile() {
     let profile;
 
     try {
-        const result = await apiRequest(`/api/users?username=${encodeURIComponent(username)}`);
+        const result = await apiRequest(`/api/users.php?username=${encodeURIComponent(username)}`);
         profile = result.profile;
     } catch (error) {
         status.textContent = error.status === 404 ? 'User not found.' : error.message;

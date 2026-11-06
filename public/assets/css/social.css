@@ -1,15 +1,17 @@
 .social-main { min-width: 0; border-right: 1px solid var(--border); }
 .social-panel { border-bottom: 1px solid var(--border); }
-.page-heading, .welcome-card { position: sticky; top: 0; z-index: 2; min-height: 58px; padding: 15px 20px; background: var(--background); border-bottom: 1px solid var(--border); }
+.page-heading, .welcome-card { position: sticky; top: 0; z-index: 2; min-height: 62px; padding: 17px 24px; background: var(--background); border-bottom: 1px solid var(--border); }
 .page-heading h1, .welcome-card h1 { font-size: 21px; }
-.social-panel > h1, .social-panel > h2 { padding: 16px 20px; border-bottom: 1px solid var(--border); }
+.social-panel > h1, .social-panel > h2 { padding: 18px 24px; border-bottom: 1px solid var(--border); }
 .social-panel > h2.visually-hidden { padding: 0; border: 0; }
 .muted, time { color: var(--text-secondary); font-size: 14px; }
-.tweet-form { padding: 18px 20px 15px; }
-.tweet-form textarea { min-height: 95px; padding: 4px 0; border: 0; border-radius: 0; background: transparent; font-size: 19px; line-height: 1.4; }
+.tweet-form { padding: 22px 24px 20px; }
+.tweet-form textarea { min-height: 108px; padding: 4px 0; border: 0; border-radius: 0; background: transparent; font-size: 19px; line-height: 1.5; }
 .tweet-form textarea:focus { box-shadow: none; }
 .tweet-form-footer { display: flex; align-items: center; justify-content: flex-end; gap: 18px; padding-top: 10px; border-top: 1px solid var(--border); }
-.tweet-card, .user-card { padding: 15px 20px; border-bottom: 1px solid var(--border); }
+.tweet-card, .user-card { border-bottom: 1px solid var(--border); }
+.tweet-card { padding: 20px 44px; }
+.user-card { padding: 15px 40px; }
 .tweet-card:last-child, .user-card:last-child { border-bottom: 0; }
 .tweet-top { display: flex; align-items: baseline; flex-wrap: wrap; gap: 8px; }
 .tweet-author, .user-card-name { color: var(--text); font-weight: 800; }
@@ -18,9 +20,9 @@
 .tweet-handle { color: var(--accent); font-weight: 400; }
 .tweet-top time { margin-left: auto; }
 .tweet-top time::before { content: "·"; margin-right: 8px; }
-.tweet-content { margin-top: 7px; white-space: pre-wrap; overflow-wrap: anywhere; }
+.tweet-content { margin-top: 10px; white-space: pre-wrap; overflow-wrap: anywhere; }
 .edited-label { display: block; margin-top: 6px; }
-.tweet-actions { display: flex; align-items: center; gap: 10px; margin-top: 11px; }
+.tweet-actions { display: flex; align-items: center; gap: 12px; margin-top: 14px; }
 .tweet-like-button { display: inline-flex; align-items: center; gap: 7px; padding: 5px 9px; border: 0; border-radius: 999px; color: var(--text-secondary); background: transparent; }
 .tweet-like-button:hover:not(:disabled), .tweet-like-button[aria-pressed="true"] { color: #ff6370; background: #271519; }
 .tweet-like-button:disabled { opacity: .55; cursor: wait; }
@@ -34,13 +36,13 @@
 .user-card { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
 .user-card-details { min-width: 0; }
 .user-card p { margin-top: 4px; overflow-wrap: anywhere; }
-.profile-meta { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 18px; }
+.profile-meta { display: flex; flex-wrap: wrap; gap: 20px; margin-top: 22px; }
 .profile-meta a { color: var(--text); }
 .profile-meta a:hover { text-decoration: underline; }
-.profile-bio { margin-top: 15px; white-space: pre-wrap; overflow-wrap: anywhere; }
+.profile-bio { margin-top: 18px; white-space: pre-wrap; overflow-wrap: anywhere; }
 #profile-panel { min-height: 220px; }
 #profile-panel #profile-status { padding: 20px; }
-#profile-content { padding: 26px 20px 20px; }
+#profile-content { padding: 32px 24px 26px; }
 #profile-content h1 { font-size: 25px; }
 #profile-content > .muted { margin-top: 3px; }
 #profile-content > .btn { margin-top: 18px; }
@@ -62,4 +64,4 @@ dialog h2 { margin-bottom: 22px; }
 dialog label { margin-top: 16px; }
 dialog .muted { display: block; margin-top: 5px; text-align: right; }
 .modal-actions { display: flex; justify-content: flex-end; gap: 10px; margin-top: 24px; }
-@media (max-width: 620px) { .tweet-card, .user-card { padding: 14px; } .page-heading, .welcome-card, .social-panel > h1, .social-panel > h2 { padding-left: 14px; padding-right: 14px; } .search-row { padding-left: 14px; padding-right: 14px; } }
+@media (max-width: 620px) { .tweet-card { padding: 18px 16px; } .user-card { padding: 14px; } .page-heading, .welcome-card, .social-panel > h1, .social-panel > h2 { padding-left: 16px; padding-right: 16px; } .tweet-form { padding: 18px 16px; } #profile-content { padding: 26px 16px 20px; } .search-row { padding-left: 14px; padding-right: 14px; } }
