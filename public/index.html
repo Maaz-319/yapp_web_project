@@ -13,18 +13,18 @@
     <div class="app">
         <div id="site-nav"></div>
         <main class="social-main home-main">
-            <section class="welcome-card">
+            <header class="welcome-card">
                 <h1 id="greeting">Loading your account…</h1>
-            </section>
+            </header>
             <section class="social-panel tweet-form">
                 <form id="tweet-form" novalidate>
-                    <label for="tweet-content">What’s happening?</label>
-                    <textarea id="tweet-content" name="content" rows="4"></textarea>
+                    <label class="visually-hidden" for="tweet-content">What’s happening?</label>
+                    <textarea id="tweet-content" name="content" rows="4" placeholder="What’s happening?"></textarea>
                     <div class="tweet-form-footer"><span id="tweet-count" class="muted">0/280</span><button class="btn btn-primary" id="tweet-submit" type="submit" disabled>Post</button></div>
                 </form>
             </section>
             <section class="social-panel">
-                <h2>Home feed</h2>
+                <h2 class="visually-hidden">Home feed</h2>
                 <p id="home-feed-status" class="muted loading-status" role="status">Loading your feed…</p>
                 <div id="home-tweets" aria-live="polite"></div>
                 <p class="empty-message" id="home-empty" hidden>No posts in your feed yet. <a href="/search.html">Find people to follow</a>.</p>

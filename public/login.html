@@ -8,13 +8,16 @@
     <link rel="stylesheet" href="/assets/css/base.css">
 </head>
 <body>
-    <div class="auth-page">
+    <div class="auth-page auth-page-branded">
+        <section class="auth-visual" aria-label="Yapp">
+            <div class="auth-brand"><span class="auth-brand-mark" aria-hidden="true">Y</span><span>Yapp</span></div>
+            <img class="auth-image" src="/assets/images/home.jpg" alt="People sharing ideas through Yapp">
+        </section>
         <div class="auth-container">
             <header class="auth-header">
-                <h1>Log in to Yapp</h1>
+                <h1 id="login-heading">Log in to Yapp</h1>
                 <p>Welcome back</p>
             </header>
-
             <form id="login-form" class="auth-form" novalidate>
                 <div class="form-group">
                     <label for="identifier">Username or email</label>
