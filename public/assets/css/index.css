@@ -1,70 +1,117 @@
 .app {
+    --app-gutter: clamp(24px, 4vw, 72px);
+    display: grid;
+    grid-template-columns: 220px minmax(0, 800px);
+    width: min(calc(100% - var(--app-gutter)), 1020px);
     min-height: 100vh;
+    margin-left: var(--app-gutter);
+}
+
+#site-nav {
+    border-right: 1px solid var(--border);
 }
 
 .nav {
+    position: sticky;
+    top: 0;
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 16px;
-    padding: 12px 20px;
-    border-bottom: 1px solid var(--border);
-    background: var(--background);
+    flex-direction: column;
+    height: 100vh;
+    padding: 14px 14px 18px 8px;
+    background: var(--sidebar-background);
 }
 
 .nav-logo {
-    color: var(--primary);
-    font-size: 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: max-content;
+    padding: 8px 14px;
+    font-size: 22px;
     font-weight: 800;
+    letter-spacing: -.04em;
+}
+
+.nav-logo:hover {
+    text-decoration: none;
+}
+
+.nav-logo-mark {
+    display: grid;
+    place-items: center;
+    width: 37px;
+    height: 37px;
+    border: 2px solid currentColor;
+    border-radius: 11px;
+    font-size: 25px;
+    line-height: 1;
 }
 
 .nav-actions {
     display: flex;
-    align-items: center;
-    gap: 12px;
+    flex: 1;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    padding-top: 25px;
 }
 
 .nav-link {
-    color: var(--text-secondary);
-    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 17px;
+    width: fit-content;
+    padding: 11px 16px;
+    border-radius: 999px;
+    color: var(--text);
+    font-size: 19px;
+    line-height: 1.25;
+}
+
+.nav-icon {
+    width: 24px;
+    height: 24px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    flex: none;
+}
+
+.nav-link:hover {
+    background: var(--surface-hover);
+    text-decoration: none;
+}
+
+.nav-link[aria-current="page"] {
+    font-weight: 800;
+    color: var(--accent);
 }
 
 .nav-user {
+    width: 100%;
+    margin-top: auto;
+    padding: 18px 16px 5px;
     color: var(--text-secondary);
-    font-size: 14px;
+    overflow-wrap: anywhere;
+}
+
+.nav-logout {
+    margin: 10px 16px 0;
 }
 
 .home-main {
-    width: min(100% - 32px, 760px);
-    margin: 40px auto;
+    min-width: 0;
 }
 
-.welcome-card,
-.empty-state {
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    padding: 24px;
-    background: var(--background);
-}
-
-.welcome-card h1,
-.home-main > h1 {
-    margin-bottom: 8px;
-}
-
-.welcome-card p,
-.empty-state {
-    color: var(--text-secondary);
-}
-
-.empty-state {
-    margin-top: 16px;
-    text-align: center;
+.app-admin {
+    grid-template-columns: 220px minmax(0, 850px);
+    width: min(calc(100% - var(--app-gutter)), 1070px);
 }
 
 .table-wrap {
     overflow-x: auto;
-    margin-top: 16px;
 }
 
 .user-table {
@@ -75,23 +122,72 @@
 
 .user-table th,
 .user-table td {
-    padding: 12px;
+    padding: 14px 17px;
     border-bottom: 1px solid var(--border);
     overflow-wrap: anywhere;
+    vertical-align: top;
 }
 
 .user-table th {
-    background: var(--surface);
+    color: var(--text-secondary);
+    font-size: 13px;
+    font-weight: 700;
 }
 
-@media (max-width: 640px) {
-    .nav {
-        align-items: flex-start;
-        gap: 12px;
+#admin-content {
+    min-width: 0;
+    border-right: 1px solid var(--border);
+}
+
+#admin-content h1 {
+    padding: 18px 20px;
+    border-bottom: 1px solid var(--border);
+}
+
+#user-count {
+    min-height: 48px;
+    padding: 12px 20px;
+    color: var(--text-secondary);
+    border-bottom: 1px solid var(--border);
+}
+
+@media (max-width: 900px) {
+
+    .app,
+    .app-admin {
+        grid-template-columns: 220px minmax(0, 1fr);
+    }
+}
+
+@media (max-width: 700px) {
+
+    .app,
+    .app-admin {
+        grid-template-columns: 165px minmax(0, 1fr);
     }
 
-    .nav-actions {
-        flex-wrap: wrap;
-        justify-content: flex-end;
+    .nav {
+        padding: 12px 6px;
+    }
+
+    .nav-link {
+        padding: 10px;
+        font-size: 15px;
+    }
+
+    .nav-logo {
+        gap: 7px;
+        padding: 8px;
+        font-size: 17px;
+    }
+
+    .nav-logo-mark {
+        width: 30px;
+        height: 30px;
+        font-size: 19px;
+    }
+
+    .nav-logout {
+        margin-left: 10px;
     }
 }

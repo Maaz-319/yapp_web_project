@@ -11,7 +11,7 @@ async function initProfile() {
     let profile;
 
     try {
-        const result = await apiRequest(`/api/users?username=${encodeURIComponent(username)}`);
+        const result = await apiRequest(`/api/users.php?username=${encodeURIComponent(username)}`);
         profile = result.profile;
     } catch (error) {
         status.textContent = error.status === 404 ? 'User not found.' : error.message;
@@ -22,6 +22,7 @@ async function initProfile() {
         return;
     }
     document.title = `${profile.display_name} (@${profile.username}) - Yapp`;
+    document.querySelector('.page-heading h1').textContent = profile.display_name;
     status.hidden = true;
     content.hidden = false;
     const heading = document.createElement('h1');
@@ -55,7 +56,6 @@ async function initProfile() {
         edit.type = 'button';
         edit.className = 'btn btn-secondary';
         edit.textContent = 'Edit profile';
-        edit.style.marginTop = '16px';
         edit.addEventListener('click', openEditor);
         content.appendChild(edit);
     } else {
@@ -63,7 +63,6 @@ async function initProfile() {
         follow.type = 'button';
         follow.className = profile.is_following ? 'btn btn-secondary' : 'btn btn-primary';
         follow.textContent = profile.is_following ? 'Following' : 'Follow';
-        follow.style.marginTop = '16px';
         follow.addEventListener('click', async () => {
             follow.disabled = true;
             try {

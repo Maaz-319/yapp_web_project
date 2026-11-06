@@ -1,11 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Profile - Yapp</title><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="stylesheet" href="/assets/css/base.css"><link rel="stylesheet" href="/assets/css/index.css"><link rel="stylesheet" href="/assets/css/social.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Profile - Yapp</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="stylesheet" href="/assets/css/base.css">
+    <link rel="stylesheet" href="/assets/css/index.css">
+    <link rel="stylesheet" href="/assets/css/social.css">
 </head>
-<body><div class="app"><div id="site-nav"></div><main class="social-main">
-    <section class="social-panel" id="profile-panel"><p id="profile-status" class="muted loading-status" role="status">Loading profile…</p><div id="profile-content" hidden></div></section>
-    <section class="social-panel" id="profile-tweets-section"><h2>Posts</h2><p id="profile-tweets-status" class="muted loading-status" role="status">Loading posts…</p><div id="profile-tweets"></div><p id="profile-empty" class="empty-message" hidden>No posts yet.</p><button id="tweets-more" class="btn btn-secondary" type="button" hidden>Load more</button></section>
-</main></div><dialog id="edit-dialog" aria-labelledby="edit-title"><form id="edit-profile-form" novalidate><h2 id="edit-title">Edit profile</h2><label for="display_name">Display name</label><input id="display_name" required maxlength="50"><p class="muted" id="name-count"></p><label for="bio">Bio</label><textarea id="bio" rows="4" maxlength="160"></textarea><p class="muted" id="bio-count"></p><div class="modal-actions"><button type="button" class="btn btn-secondary" id="edit-cancel">Cancel</button><button type="submit" class="btn btn-primary" id="edit-save">Save</button></div></form></dialog>
-<div id="toast-container" class="toast-container" aria-live="polite" aria-atomic="true"></div><script src="/assets/js/api.js?v=3"></script><script src="/assets/js/components.js?v=4"></script><script src="/assets/js/profile.js?v=2"></script></body></html>
+
+<body>
+    <div class="app">
+        <div id="site-nav"></div>
+        <main class="social-main">
+            <header class="page-heading">
+                <h1>Profile</h1>
+            </header>
+            <section class="social-panel" id="profile-panel">
+                <p id="profile-status" class="muted loading-status" role="status">Loading profile…</p>
+                <div id="profile-content" hidden></div>
+            </section>
+            <section class="social-panel" id="profile-tweets-section">
+                <h2>Posts</h2>
+                <p id="profile-tweets-status" class="muted loading-status" role="status">Loading posts…</p>
+                <div id="profile-tweets"></div>
+                <p id="profile-empty" class="empty-message" hidden>No posts yet.</p><button id="tweets-more"
+                    class="btn btn-secondary" type="button" hidden>Load more</button>
+            </section>
+        </main>
+    </div>
+    <dialog id="edit-dialog" aria-labelledby="edit-title">
+        <form id="edit-profile-form" novalidate>
+            <h2 id="edit-title">Edit profile</h2><label for="display_name">Display name</label><input id="display_name"
+                required maxlength="50">
+            <p class="muted" id="name-count"></p><label for="bio">Bio</label><textarea id="bio" rows="4"
+                maxlength="160"></textarea>
+            <p class="muted" id="bio-count"></p>
+            <div class="modal-actions"><button type="button" class="btn btn-secondary"
+                    id="edit-cancel">Cancel</button><button type="submit" class="btn btn-primary"
+                    id="edit-save">Save</button></div>
+        </form>
+    </dialog>
+    <div id="toast-container" class="toast-container" aria-live="polite" aria-atomic="true"></div>
+    <script src="/assets/js/api.js?v=3"></script>
+    <script src="/assets/js/components.js?v=4"></script>
+    <script src="/assets/js/profile.js?v=3"></script>
+</body>
+
+</html>

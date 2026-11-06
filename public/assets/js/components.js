@@ -49,6 +49,40 @@ function formatRelativeTime(value) {
     return date.toLocaleDateString(undefined, { month: 'short', day: 'numeric' });
 }
 
+function confirmPostDelete() {
+    return new Promise((resolve) => {
+        const dialog = document.createElement('dialog');
+        const form = document.createElement('form');
+        form.method = 'dialog';
+        const title = document.createElement('h2');
+        title.id = 'delete-post-title';
+        title.textContent = 'Delete this post?';
+        dialog.setAttribute('aria-labelledby', title.id);
+        const description = document.createElement('p');
+        description.textContent = 'This post will be removed from Yapp.';
+        const actions = document.createElement('div');
+        actions.className = 'modal-actions';
+        const cancel = document.createElement('button');
+        cancel.className = 'btn btn-secondary';
+        cancel.value = 'cancel';
+        cancel.textContent = 'Cancel';
+        const remove = document.createElement('button');
+        remove.className = 'btn btn-danger-solid';
+        remove.value = 'delete';
+        remove.textContent = 'Delete';
+        actions.append(cancel, remove);
+        form.append(title, description, actions);
+        dialog.appendChild(form);
+        document.body.appendChild(dialog);
+        dialog.addEventListener('close', () => {
+            resolve(dialog.returnValue === 'delete');
+            dialog.remove();
+        });
+        dialog.showModal();
+        cancel.focus();
+    });
+}
+
 function createTweetCard(tweet, onDeleted = null) {
     let liked = Boolean(tweet.liked_by_me);
     let likeCount = Number(tweet.like_count) || 0;
@@ -59,7 +93,12 @@ function createTweetCard(tweet, onDeleted = null) {
     const author = document.createElement('a');
     author.href = `/profile.html?u=${encodeURIComponent(tweet.author.username)}`;
     author.className = 'tweet-author';
-    author.textContent = `${tweet.author.display_name} @${tweet.author.username}`;
+    const authorName = document.createElement('span');
+    authorName.textContent = tweet.author.display_name;
+    const authorHandle = document.createElement('span');
+    authorHandle.className = 'tweet-handle';
+    authorHandle.textContent = `@${tweet.author.username}`;
+    author.append(authorName, authorHandle);
     const time = document.createElement('time');
     time.dateTime = `${String(tweet.created_at).replace(' ', 'T')}Z`;
     time.textContent = formatRelativeTime(tweet.created_at);
@@ -132,13 +171,13 @@ function createTweetCard(tweet, onDeleted = null) {
         edit.addEventListener('click', () => beginEdit());
         const remove = document.createElement('button');
         remove.type = 'button';
-        remove.className = 'btn btn-secondary';
+        remove.className = 'btn btn-secondary btn-danger';
         remove.textContent = 'Delete';
         remove.addEventListener('click', async () => {
-            if (!window.confirm('Delete this post?')) return;
+            if (!await confirmPostDelete()) return;
             remove.disabled = true;
             try {
-                await apiRequest(`/api/tweets?id=${tweet.id}`, { method: 'DELETE' });
+                await apiRequest(`/api/tweets.php?id=${tweet.id}`, { method: 'DELETE' });
                 card.remove();
                 if (onDeleted) onDeleted();
             } catch (error) {
@@ -184,7 +223,7 @@ function createTweetCard(tweet, onDeleted = null) {
         save.addEventListener('click', async () => {
             save.disabled = true;
             try {
-                const result = await apiRequest(`/api/tweets?id=${tweet.id}`, {
+                const result = await apiRequest(`/api/tweets.php?id=${tweet.id}`, {
                     method: 'PATCH',
                     body: JSON.stringify({ content: editor.value }),
                 });
@@ -245,7 +284,13 @@ function mountNavigation(user, active = '') {
     const logo = document.createElement('a');
     logo.href = '/';
     logo.className = 'nav-logo';
-    logo.textContent = 'Yapp';
+    const mark = document.createElement('span');
+    mark.className = 'nav-logo-mark';
+    mark.textContent = 'Y';
+    const logoText = document.createElement('span');
+    logoText.className = 'nav-logo-text';
+    logoText.textContent = 'Yapp';
+    logo.append(mark, logoText);
     const actions = document.createElement('div');
     actions.className = 'nav-actions';
     const links = [
@@ -253,12 +298,27 @@ function mountNavigation(user, active = '') {
         ['Search', '/search.html', 'search'],
         ['My Profile', `/profile.html?u=${encodeURIComponent(user.username)}`, 'profile'],
     ];
+    const icons = {
+        home: 'M3 10.5 12 3l9 7.5V21h-6v-6H9v6H3z',
+        search: 'M11 3a8 8 0 1 0 0 16 8 8 0 0 0 0-16m6 14 5 5',
+        profile: 'M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8M4 21a8 8 0 0 1 16 0',
+        admin: 'M4 4h16v16H4zM4 10h16M10 10v10',
+    };
     if (user.role === 'admin') links.push(['Admin', '/admin.html', 'admin']);
     for (const [label, href, key] of links) {
         const link = document.createElement('a');
         link.href = href;
         link.className = 'nav-link';
-        link.textContent = label;
+        const icon = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+        icon.setAttribute('viewBox', '0 0 24 24');
+        icon.setAttribute('aria-hidden', 'true');
+        icon.classList.add('nav-icon');
+        const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+        path.setAttribute('d', icons[key]);
+        icon.appendChild(path);
+        const linkText = document.createElement('span');
+        linkText.textContent = label;
+        link.append(icon, linkText);
         if (active === key) link.setAttribute('aria-current', 'page');
         actions.appendChild(link);
     }
@@ -268,7 +328,7 @@ function mountNavigation(user, active = '') {
     actions.appendChild(username);
     const logout = document.createElement('button');
     logout.type = 'button';
-    logout.className = 'btn btn-secondary';
+    logout.className = 'btn btn-secondary nav-logout';
     logout.textContent = 'Log out';
     logout.addEventListener('click', async () => {
         logout.disabled = true;

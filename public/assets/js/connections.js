@@ -20,9 +20,9 @@ async function initConnections() {
     title.textContent = `@${username}`;
     for (const [key, label] of [['followers', 'Followers'], ['following', 'Following']]) {
         const link = document.createElement('a');
-        link.className = 'btn ' + (tab === key ? 'btn-primary' : 'btn-secondary');
         link.href = `/connections.html?u=${encodeURIComponent(username)}&tab=${key}`;
         link.textContent = label;
+        if (tab === key) link.setAttribute('aria-current', 'page');
         tabs.appendChild(link);
     }
 
