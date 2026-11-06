@@ -138,7 +138,7 @@ function createTweetCard(tweet, onDeleted = null) {
             if (!window.confirm('Delete this post?')) return;
             remove.disabled = true;
             try {
-                await apiRequest(`/api/tweets?id=${tweet.id}`, { method: 'DELETE' });
+                await apiRequest(`/api/tweets.php?id=${tweet.id}`, { method: 'DELETE' });
                 card.remove();
                 if (onDeleted) onDeleted();
             } catch (error) {
@@ -184,7 +184,7 @@ function createTweetCard(tweet, onDeleted = null) {
         save.addEventListener('click', async () => {
             save.disabled = true;
             try {
-                const result = await apiRequest(`/api/tweets?id=${tweet.id}`, {
+                const result = await apiRequest(`/api/tweets.php?id=${tweet.id}`, {
                     method: 'PATCH',
                     body: JSON.stringify({ content: editor.value }),
                 });

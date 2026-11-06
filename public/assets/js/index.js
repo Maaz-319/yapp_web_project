@@ -34,7 +34,7 @@ async function initHome() {
         if (submit.disabled) return;
         submit.disabled = true;
         try {
-            const result = await apiRequest('/api/tweets', {
+            const result = await apiRequest('/api/tweets.php', {
                 method: 'POST',
                 body: JSON.stringify({ content: content.value }),
             });
