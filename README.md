@@ -34,4 +34,3 @@ Yapp is a learning project for building a small web application with account log
 | [Local setup](docs/setup.md) | How to run Yapp with local Apache and MySQL. |
 | [Tech stack](docs/tech-stack.md) | Languages and software used by the project. |
 | [Repository structure](docs/repo-structure.md) | What the main folders and files are for. |
-| [UI design notes](DESIGN.md) | Current visual style and interface conventions. |
