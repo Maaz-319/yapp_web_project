@@ -16,7 +16,7 @@ erDiagram
 
 | Table | What it stores | Important rules |
 |---|---|---|
-| `users` | Accounts, profile text, password hash, and role | Unique username and email. Role is `student` or `admin`; new accounts default to `student`. |
+| `users` | Accounts, profile text, password hash, and role | Unique username and email. Role is `user` or `admin`; new accounts default to `user`. |
 | `tweets` | Short posts and their timestamps | Each post belongs to a user. Content is limited to 280 characters by the API. `deleted_at` marks a removed post. |
 | `follows` | Which account follows which other account | Both IDs refer to users. A unique pair prevents duplicate follows. |
 | `likes` | Which account likes which post | The user/post pair is the primary key, so one account can like a post once. |

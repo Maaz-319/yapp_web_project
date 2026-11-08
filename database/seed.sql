@@ -1,18 +1,18 @@
 -- Seed data for yapp
 -- Passwords are bcrypt hashes of "password123" (cost 10)
--- Hash: $2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi
+-- Hash: $2y$10$KLYqyNcIK.7tkLDGbL1Kh.Ka2OB0VAMwbpoJxHGkW3zC4JTq.Z8ii
 
 INSERT INTO users (username, email, password_hash, display_name, bio, created_at) VALUES
-('alice', 'alice@example.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Alice Johnson', 'Software developer | Coffee enthusiast', '2026-01-15 10:00:00'),
-('bob', 'bob@example.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Bob Smith', 'Full-stack engineer', '2026-01-16 11:30:00'),
-('carol', 'carol@example.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Carol Davis', 'UX designer', '2026-01-17 09:15:00'),
-('dave', 'dave@example.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Dave Wilson', 'DevOps engineer', '2026-01-18 14:20:00'),
-('eve', 'eve@example.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Eve Brown', 'Frontend developer', '2026-01-19 16:45:00'),
-('frank', 'frank@example.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Frank Miller', 'Backend developer', '2026-01-20 08:00:00'),
-('grace', 'grace@example.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Grace Lee', 'Mobile developer', '2026-01-21 12:30:00'),
-('henry', 'henry@example.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Henry Taylor', 'Security engineer', '2026-01-22 15:00:00'),
-('iris', 'iris@example.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Iris Anderson', 'Data engineer', '2026-01-23 10:30:00'),
-('jack', 'jack@example.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Jack Thomas', 'Cloud architect', '2026-01-24 13:45:00');
+('alice', 'alice@example.com', '$2y$10$KLYqyNcIK.7tkLDGbL1Kh.Ka2OB0VAMwbpoJxHGkW3zC4JTq.Z8ii', 'Alice Johnson', 'Software developer | Coffee enthusiast', '2026-01-15 10:00:00'),
+('bob', 'bob@example.com', '$2y$10$KLYqyNcIK.7tkLDGbL1Kh.Ka2OB0VAMwbpoJxHGkW3zC4JTq.Z8ii', 'Bob Smith', 'Full-stack engineer', '2026-01-16 11:30:00'),
+('carol', 'carol@example.com', '$2y$10$KLYqyNcIK.7tkLDGbL1Kh.Ka2OB0VAMwbpoJxHGkW3zC4JTq.Z8ii', 'Carol Davis', 'UX designer', '2026-01-17 09:15:00'),
+('dave', 'dave@example.com', '$2y$10$KLYqyNcIK.7tkLDGbL1Kh.Ka2OB0VAMwbpoJxHGkW3zC4JTq.Z8ii', 'Dave Wilson', 'DevOps engineer', '2026-01-18 14:20:00'),
+('eve', 'eve@example.com', '$2y$10$KLYqyNcIK.7tkLDGbL1Kh.Ka2OB0VAMwbpoJxHGkW3zC4JTq.Z8ii', 'Eve Brown', 'Frontend developer', '2026-01-19 16:45:00'),
+('frank', 'frank@example.com', '$2y$10$KLYqyNcIK.7tkLDGbL1Kh.Ka2OB0VAMwbpoJxHGkW3zC4JTq.Z8ii', 'Frank Miller', 'Backend developer', '2026-01-20 08:00:00'),
+('grace', 'grace@example.com', '$2y$10$KLYqyNcIK.7tkLDGbL1Kh.Ka2OB0VAMwbpoJxHGkW3zC4JTq.Z8ii', 'Grace Lee', 'Mobile developer', '2026-01-21 12:30:00'),
+('henry', 'henry@example.com', '$2y$10$KLYqyNcIK.7tkLDGbL1Kh.Ka2OB0VAMwbpoJxHGkW3zC4JTq.Z8ii', 'Henry Taylor', 'Security engineer', '2026-01-22 15:00:00'),
+('iris', 'iris@example.com', '$2y$10$KLYqyNcIK.7tkLDGbL1Kh.Ka2OB0VAMwbpoJxHGkW3zC4JTq.Z8ii', 'Iris Anderson', 'Data engineer', '2026-01-23 10:30:00'),
+('jack', 'jack@example.com', '$2y$10$KLYqyNcIK.7tkLDGbL1Kh.Ka2OB0VAMwbpoJxHGkW3zC4JTq.Z8ii', 'Jack Thomas', 'Cloud architect', '2026-01-24 13:45:00');
 
 -- Local demo administrator: username "admin", password "admin".
 -- The password is stored as a bcrypt hash and is only for local coursework.
@@ -21,25 +21,25 @@ INSERT INTO users (username, email, password_hash, display_name, role, bio, crea
 
 -- Follow relationships
 INSERT INTO follows (follower_id, following_id, created_at) VALUES
-(1, 2, '2026-01-25 10:00:00'), -- alice follows bob
-(1, 3, '2026-01-25 10:05:00'), -- alice follows carol
-(1, 4, '2026-01-25 10:10:00'), -- alice follows dave
-(2, 1, '2026-01-25 11:00:00'), -- bob follows alice
-(2, 3, '2026-01-25 11:05:00'), -- bob follows carol
-(2, 5, '2026-01-25 11:10:00'), -- bob follows eve
-(3, 1, '2026-01-25 12:00:00'), -- carol follows alice
-(3, 2, '2026-01-25 12:05:00'), -- carol follows bob
-(3, 4, '2026-01-25 12:10:00'), -- carol follows dave
-(4, 1, '2026-01-25 13:00:00'), -- dave follows alice
-(4, 5, '2026-01-25 13:05:00'), -- dave follows eve
-(5, 2, '2026-01-25 14:00:00'), -- eve follows bob
-(5, 3, '2026-01-25 14:05:00'), -- eve follows carol
-(6, 1, '2026-01-25 15:00:00'), -- frank follows alice
-(6, 2, '2026-01-25 15:05:00'), -- frank follows bob
-(7, 3, '2026-01-25 16:00:00'), -- grace follows carol
-(8, 4, '2026-01-25 17:00:00'), -- henry follows dave
-(9, 5, '2026-01-25 18:00:00'), -- iris follows eve
-(10, 1, '2026-01-25 19:00:00'); -- jack follows alice
+(1, 2, '2026-01-25 10:00:00'),
+(1, 3, '2026-01-25 10:05:00'),
+(1, 4, '2026-01-25 10:10:00'),
+(2, 1, '2026-01-25 11:00:00'),
+(2, 3, '2026-01-25 11:05:00'),
+(2, 5, '2026-01-25 11:10:00'),
+(3, 1, '2026-01-25 12:00:00'),
+(3, 2, '2026-01-25 12:05:00'),
+(3, 4, '2026-01-25 12:10:00'),
+(4, 1, '2026-01-25 13:00:00'),
+(4, 5, '2026-01-25 13:05:00'),
+(5, 2, '2026-01-25 14:00:00'),
+(5, 3, '2026-01-25 14:05:00'),
+(6, 1, '2026-01-25 15:00:00'),
+(6, 2, '2026-01-25 15:05:00'),
+(7, 3, '2026-01-25 16:00:00'),
+(8, 4, '2026-01-25 17:00:00'),
+(9, 5, '2026-01-25 18:00:00'),
+(10, 1, '2026-01-25 19:00:00');
 
 -- Tweets
 INSERT INTO tweets (user_id, content, created_at) VALUES
@@ -109,16 +109,16 @@ INSERT INTO tweets (user_id, content, created_at) VALUES
 
 -- Likes
 INSERT INTO likes (user_id, tweet_id, created_at) VALUES
-(1, 3, '2026-02-01 11:05:00'), -- alice likes bob's tweet
-(1, 5, '2026-02-01 15:50:00'), -- alice likes carol's tweet
-(2, 1, '2026-02-01 09:05:00'), -- bob likes alice's tweet
-(2, 2, '2026-02-02 10:35:00'), -- bob likes alice's tweet
-(3, 1, '2026-02-01 09:10:00'), -- carol likes alice's tweet
-(3, 4, '2026-02-03 14:25:00'), -- carol likes bob's tweet
-(4, 2, '2026-02-02 10:40:00'), -- dave likes alice's tweet
-(5, 3, '2026-02-01 11:10:00'), -- eve likes bob's tweet
-(6, 1, '2026-02-01 09:15:00'), -- frank likes alice's tweet
-(7, 5, '2026-02-01 15:55:00'), -- grace likes carol's tweet
-(8, 7, '2026-02-02 16:35:00'), -- henry likes dave's tweet
-(9, 9, '2026-02-03 11:25:00'), -- iris likes eve's tweet
-(10, 11, '2026-02-04 14:55:00'); -- jack likes frank's tweet
+(1, 3, '2026-02-01 11:05:00'),
+(1, 5, '2026-02-01 15:50:00'),
+(2, 1, '2026-02-01 09:05:00'),
+(2, 2, '2026-02-02 10:35:00'),
+(3, 1, '2026-02-01 09:10:00'),
+(3, 4, '2026-02-03 14:25:00'),
+(4, 2, '2026-02-02 10:40:00'),
+(5, 3, '2026-02-01 11:10:00'),
+(6, 1, '2026-02-01 09:15:00'),
+(7, 5, '2026-02-01 15:55:00'),
+(8, 7, '2026-02-02 16:35:00'),
+(9, 9, '2026-02-03 11:25:00'),
+(10, 11, '2026-02-04 14:55:00');

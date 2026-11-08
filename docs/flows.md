@@ -11,7 +11,7 @@ sequenceDiagram
     Person->>Page: Enter account details
     Page->>API: POST /api/auth/register
     API->>API: Validate and hash password
-    API->>DB: Insert student account
+    API->>DB: Insert user account
     DB-->>API: New account ID
     API-->>Page: 201 JSON response
     Page->>Person: Link to sign in

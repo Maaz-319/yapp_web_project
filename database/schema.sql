@@ -1,10 +1,12 @@
+USE yapp;
+
 CREATE TABLE IF NOT EXISTS users (
   id int unsigned auto_increment primary key,
   username varchar(20) not null,
   email varchar(255) not null,
   password_hash varchar(255) not null,
   display_name varchar(50) not null,
-  role enum('student', 'admin') not null default 'student',
+  role enum('user', 'admin') not null default 'user',
   bio varchar(160) default '',
   created_at datetime not null default current_timestamp,
   updated_at datetime not null default current_timestamp on update current_timestamp,
