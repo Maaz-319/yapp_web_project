@@ -13,10 +13,10 @@ When the login form's Remember Me option is selected, Yapp also sets a 30-day co
 | Role | Allowed actions |
 |---|---|
 | Signed-out visitor | Register, log in, and view a public profile. |
-| `student` | Use signed-in features, edit their own profile, create and manage their own posts, follow accounts, and like posts. |
-| `admin` | All student actions and view the admin account list. |
+| `user` | Use signed-in features, edit their own profile, create and manage their own posts, follow accounts, and like posts. |
+| `admin` | All user actions, view the admin account list, and manage account roles and accounts. |
 
-Every new registration gets the `student` role. The registration request cannot choose a role. The API checks that the current user owns a post before editing or deleting it. Profile updates always apply to the signed-in account. Follow and like relationships use the signed-in account as their owner. Admin routes check the role on the server.
+Every new registration gets the `user` role. The registration request cannot choose a role. Admins can change an account's role to `user` or `admin`, but the last admin must remain an admin. Admins cannot delete their own account. Deleting another account also removes its posts and relationships. The API checks that the current user owns a post before editing or deleting it. Profile updates always apply to the signed-in account. Follow and like relationships use the signed-in account as their owner. Admin routes check the role on the server.
 
 ## Cookie and local security notes
 

@@ -10,27 +10,21 @@ These steps are for a local Ubuntu-style Apache, PHP, and MySQL setup. Point the
 
 ## Configure the database
 
-Create a database and a local database user with access to it. For example, run these statements in MySQL and choose your own password:
-
-```sql
-CREATE DATABASE yapp CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-CREATE USER 'yapp_app'@'localhost' IDENTIFIED BY 'choose-a-local-password';
-GRANT ALL PRIVILEGES ON yapp.* TO 'yapp_app'@'localhost';
-FLUSH PRIVILEGES;
-```
-
-Copy the example configuration and enter the same database details in `config/config.php`:
+Copy the example configuration and enter the database details in `config/config.php`:
 
 ```bash
 cp config/config.example.php config/config.php
 ```
 
-Import the schema and, if you want demo accounts and posts, the seed data:
+The setup script uses the example database `yapp`, user `yapp_app`, host `127.0.0.1`, and password `choose-a-local-password`. If you choose a different password, use the same value in `config/config.php` and `database/startup.sql`.
+
+Run the setup script from the project folder:
 
 ```bash
-mysql -u yapp_app -p yapp < database/schema.sql
-mysql -u yapp_app -p yapp < database/seed.sql
+bash src/setup.sh
 ```
+
+It asks for your system password for `sudo`, creates the database and app user through local MySQL root access, then runs the full schema and seed. Use it only for a new or empty database because the seed inserts demo records. Existing databases are not upgraded by this setup script.
 
 The seed has regular demo accounts with password `password123` and an admin account with username `admin` and password `admin`. These are public coursework credentials. Use them only in a local database.
 
@@ -50,4 +44,4 @@ DocumentRoot /var/www/yapp/public
 
 Ensure PHP can read the config and project files. Give the Apache user write access to `storage/logs/` and, if file sessions are configured there, `storage/sessions/`.
 
-Open the local host name configured in Apache, then sign in or create an account. For an existing database that predates the admin role, review and run `database/upgrade_existing.sql` instead of re-importing the schema and seed data.
+Open the local host name configured in Apache, then sign in or create an account.

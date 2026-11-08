@@ -18,7 +18,7 @@ Errors have this shape:
 
 | Method and path | Access | Input | Successful `data` |
 |---|---|---|---|
-| `POST /api/auth/register` | Public | JSON: `username`, `email`, `display_name`, `password` | `user`: `id`, `username`, `email`, `display_name`, `role`; status `201`. New role is `student`. |
+| `POST /api/auth/register` | Public | JSON: `username`, `email`, `display_name`, `password` | `user`: `id`, `username`, `email`, `display_name`, `role`; status `201`. New role is `user`. |
 | `POST /api/auth/login` | Public | JSON: `identifier`, `password`, optional boolean `remember_me` | `user`: `id`, `username`, `email`, `display_name`, `role`, `bio`, `created_at`. |
 | `GET /api/auth/me` | Signed in | None | `user`: current account details. |
 | `POST /api/auth/logout` | Public | Empty JSON object | `message`. Clears the active session and remember token. |
@@ -38,6 +38,8 @@ Errors have this shape:
 | `GET /api/users/following?username={name}&cursor={id}` | Signed in | `username`, optional positive `cursor` | `users`, `next_cursor`. Up to 20 accounts per page. |
 | `GET /api/users/tweets?username={name}&cursor={id}` | Signed in | `username`, optional positive `cursor` | `tweets`, `next_cursor`. Up to 20 posts per page. |
 | `GET /api/admin/users` | Admin | None | `users`: account list without password hashes. |
+| `PATCH /api/admin/users?id={id}` | Admin | JSON: `role` (`user` or `admin`) | Updated user's `id` and `role`. The last admin cannot be demoted. |
+| `DELETE /api/admin/users?id={id}` | Admin | Positive account `id` | `deleted: true`, `id`. Cannot delete yourself or the last admin. Related posts and relationships are deleted too. |
 
 Post objects include `id`, `content`, `created_at`, `edited_at`, `is_mine`, `is_edited`, `is_deleted`, `like_count`, `liked_by_me`, and `author`. When a post is deleted, the API omits it from normal lists. Numeric IDs and counts are returned as numbers.
 

@@ -97,6 +97,6 @@ api_success([
         'username' => $username,
         'email' => $email,
         'display_name' => $displayName,
-        'role' => 'student',
+        'role' => 'user',
     ],
 ], 201);

@@ -7,6 +7,10 @@
     margin-left: var(--app-gutter);
 }
 
+.app-home {
+    margin-inline: auto;
+}
+
 #site-nav {
     border-right: 1px solid var(--border);
 }
@@ -106,32 +110,116 @@
 }
 
 .app-admin {
-    grid-template-columns: 220px minmax(0, 850px);
-    width: min(calc(100% - var(--app-gutter)), 1070px);
+    grid-template-columns: 230px minmax(0, 1fr);
+    width: min(calc(100% - 48px), 1260px);
+    margin-inline: auto;
 }
 
 .table-wrap {
     overflow-x: auto;
+    background: var(--surface);
 }
 
 .user-table {
     width: 100%;
+    min-width: 960px;
     border-collapse: collapse;
+    table-layout: fixed;
     text-align: left;
 }
 
+.user-table th:nth-child(1) { width: 7%; }
+.user-table th:nth-child(2) { width: 13%; }
+.user-table th:nth-child(3) { width: 16%; }
+.user-table th:nth-child(4) { width: 22%; }
+.user-table th:nth-child(5) { width: 10%; }
+.user-table th:nth-child(6) { width: 12%; }
+.user-table th:nth-child(7) { width: 20%; }
+
 .user-table th,
 .user-table td {
-    padding: 14px 17px;
+    padding: 16px 20px;
     border-bottom: 1px solid var(--border);
     overflow-wrap: anywhere;
     vertical-align: top;
 }
 
 .user-table th {
+    position: sticky;
+    top: 0;
+    background: var(--surface);
     color: var(--text-secondary);
     font-size: 13px;
     font-weight: 700;
+    letter-spacing: .03em;
+    text-transform: uppercase;
+}
+
+.user-table tbody tr {
+    transition: background-color .15s ease;
+}
+
+.user-table tbody tr:hover {
+    background: var(--surface-hover);
+}
+
+.user-id {
+    color: var(--text-secondary);
+    font-variant-numeric: tabular-nums;
+}
+
+.user-handle {
+    color: var(--accent);
+    font-weight: 700;
+}
+
+.user-name {
+    font-weight: 600;
+}
+
+.user-email {
+    color: var(--text-secondary);
+}
+
+.role-badge {
+    display: inline-flex;
+    align-items: center;
+    min-height: 26px;
+    padding: 3px 10px;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: capitalize;
+}
+
+.role-admin {
+    color: var(--accent);
+    border-color: rgba(180, 154, 255, .45);
+    background: rgba(180, 154, 255, .12);
+}
+
+.user-table select {
+    min-height: 38px;
+    padding: 7px 10px;
+    color: var(--text);
+    background: var(--background);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+}
+
+.admin-actions {
+    white-space: nowrap;
+}
+
+.admin-actions .btn + .btn {
+    margin-left: 6px;
+}
+
+.admin-actions .btn {
+    min-height: 34px;
+    padding: 6px 12px;
+    font-size: 13px;
 }
 
 #admin-content {
